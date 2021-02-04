@@ -5,10 +5,6 @@ RSpec.describe User, type: :model do
     @user1 = create(:user)
   end
 
-  describe 'associations' do
-    it { should belong_to(:merchant) }
-  end
-
   describe 'validations' do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:email) }
@@ -20,5 +16,10 @@ RSpec.describe User, type: :model do
         should define_enum_for(:role).
           with_values([:merchant, :admin])
       end
+
+    it do
+      should define_enum_for(:status).
+        with_values([:active, :inactive])
+    end
   end
 end

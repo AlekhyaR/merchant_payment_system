@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :email, null: false
       t.string :description
       t.integer :role, default: 0
-      t.integer :account_id
+      t.integer :status, default: 0
 
       t.index :email, unique: true
 
