@@ -21,8 +21,8 @@ module Transactions
               inclusion: %w[approved captured error],
               presence: true
 
-    # def remaining_amount
-    #   amount - refunds.approved.sum(:amount)
-    # end
+    def remaining_amount
+      amount - refunds.approved.sum(:amount)
+    end
   end
 end

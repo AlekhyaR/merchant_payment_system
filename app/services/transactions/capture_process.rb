@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module Transactions
-  class ProcessCharge
+  class CaptureProcess
     included Service
-    DoubleChargeError = Class.new(Service::Error)
+    DoubleCaptureError = Class.new(Service::Error)
     AuthorizeStateError = Class.new(Service::Error)
 
     def initialize(transaction:)
       @transaction = transaction
-      @merchant = transaction.merchant
+      @merchant = transaction.user
     end
 
     def call
@@ -17,7 +17,6 @@ module Transactions
       @transaction.authorize.with_lock do
         ensure_authorize
         process_transaction
-        update_merchant
       end
     rescue Service::Error => e
       raise e
@@ -29,13 +28,13 @@ module Transactions
 
     def ensure_authorize
       ensure_authorize_approved
-      ensure_single_charge
+      ensure_single_capture
     end
 
-    def ensure_single_charge
-      return unless Transactions::Charge.approved.exists?(authorize: @transaction.authorize)
+    def ensure_single_capture
+      return unless Transactions::Capture.approved.exists?(authorize: @transaction.authorize)
 
-      raise DoubleChargeError
+      raise DoubleCaptureError
     end
 
     def ensure_authorize_approved
@@ -50,10 +49,6 @@ module Transactions
 
     def approve_transaction
       @transaction.approved!
-    end
-
-    def update_merchant
-      @merchant.increment_total_transaction_sum(@transaction.amount)
     end
   end
 end

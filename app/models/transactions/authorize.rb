@@ -19,7 +19,7 @@ module Transactions
               presence: true
 
     validates :status,
-              inclusion: %w[pending approved declined],
+              inclusion: %w[pending approved declined voided],
               presence: true
   end
 end

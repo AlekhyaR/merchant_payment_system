@@ -1,23 +1,22 @@
 # frozen_string_literal: true
 
 module Transactions
-  class ProcessRefund
+  class RefundProcess
     include Service
     InsufficientFundsError = Class.new(Error)
 
     def initialize(transaction:)
       @transaction = transaction
-      @merchant = transaction.merchant
+      @merchant = transaction.user
     end
 
     def call
       return if @transaction.persisted?
 
-      @transaction.charge.with_lock do
+      @transaction.capture.with_lock do
         ensure_funds_available
         approve_transaction
-        update_charge
-        update_merchant
+        update_capture
       end
     rescue Error => e
       raise e
@@ -28,7 +27,7 @@ module Transactions
     private
 
     def ensure_funds_available
-      return if @transaction.charge.remaining_amount >= @transaction.amount
+      return if @transaction.capture.remaining_amount >= @transaction.amount
 
       raise InsufficientFundsError
     end
@@ -37,12 +36,8 @@ module Transactions
       @transaction.approved!
     end
 
-    def update_charge
-      @transaction.charge.refunded!
-    end
-
-    def update_merchant
-      @merchant.increment_total_transaction_sum(-@transaction.amount)
+    def update_capture
+      @transaction.capture.refunded!
     end
   end
 end

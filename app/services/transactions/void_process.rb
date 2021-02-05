@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 module Transactions
-  class ProcessReversal
+  class VoidProcess
     include Service
-    AuthorizeIrreversibleError = Class.new(Error)
+    AuthorizeUnvoidableError = Class.new(Error)
 
     def initialize(transaction:)
       @transaction = transaction
-      @merchant = transaction.merchant
+      @merchant = transaction.user
     end
 
     def call
       return if @transaction.persisted?
 
       @transaction.authorize.with_lock do
-        ensure_authorize_reversible
+        ensure_authorize_voidable
         approve_transaction
         update_authorize
       end
@@ -26,14 +26,14 @@ module Transactions
 
     private
 
-    def ensure_authorize_reversible
-      irreversible =
-        @transaction.authorize.charge ||
-        @transaction.authorize.reversed? ||
+    def ensure_authorize_voidable
+      un_voidable =
+        @transaction.authorize.capture||
+        @transaction.authorize.voided? ||
         @transaction.authorize.error?
-      return unless irreversible
+      return unless un_voidable
 
-      raise AuthorizeIrreversibleError
+      raise AuthorizeUnvoidableError
     end
 
     def approve_transaction
@@ -41,7 +41,7 @@ module Transactions
     end
 
     def update_authorize
-      @transaction.authorize.reversed!
+      @transaction.authorize.voided!
     end
   end
 end
