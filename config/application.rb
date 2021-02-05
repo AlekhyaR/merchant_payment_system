@@ -17,3 +17,5 @@ module PaymentSysstem
     # the framework and any gems in your application.
   end
 end
+
+require 'service'
