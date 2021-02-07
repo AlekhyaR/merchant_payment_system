@@ -5,5 +5,5 @@ Rails.application.routes.draw do
       sessions: 'users/sessions'
     }
 
-  # root to: "home#index"
+  root to: "home#index"
 end
