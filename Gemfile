@@ -16,6 +16,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
 gem 'jwt'
+gem 'slim-rails'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
