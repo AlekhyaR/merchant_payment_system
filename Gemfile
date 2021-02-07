@@ -17,6 +17,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'jwt'
 gem 'slim-rails'
+gem 'faker'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -29,6 +30,7 @@ group :development do
   gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry'
 end
 
 group :test do
