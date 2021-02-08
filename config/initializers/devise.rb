@@ -239,6 +239,9 @@ Devise.setup do |config|
   #
   # Require the `devise-encryptable` gem when using anything other than bcrypt
   # config.encryptor = :sha512
+  config.warden do |config|
+    config.default_strategies(:scope => :user).unshift :jwt
+  end
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for

@@ -13,7 +13,7 @@ require 'Faker'
     id: id,
     name: Faker::Name.name,
     email: Faker::Internet.email,
-    encrypted_password: "merchant_user123",
+    password: "merchant_user123",
     role: 0,
     status: 0
 
@@ -25,7 +25,7 @@ end
     id: id,
     name: Faker::Name.name,
     email: Faker::Internet.email,
-    encrypted_password: "merchant_user123",
+    password: "merchant_user123",
     role: 0,
     status: 1
   )
@@ -36,7 +36,7 @@ end
     id: id,
     name: Faker::Name.name,
     email: Faker::Internet.email,
-    encrypted_password: "admin_user123",
+    password: "admin_user123",
     role: 1,
     status: 0
   )
@@ -47,7 +47,7 @@ end
     id: id,
     name: Faker::Name.name,
     email: Faker::Internet.email,
-    encrypted_password: "admin_user123",
+    password: "admin_user123",
     role: 1,
     status: 1
   )
