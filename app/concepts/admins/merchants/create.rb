@@ -1,12 +1,11 @@
 # frozen_string_literal: true
-
 module Admins
   module Merchants
     class Create
       include Operation
 
       policy ApplicationPolicy
-      contract ::Merchant
+      contract ::User
 
       def call
         authorize! policy.admin?
@@ -18,7 +17,6 @@ module Admins
 
       def validate_contract
         return if contract.valid?
-
         errors.merge!(contract.errors)
         fail!
       end

@@ -7,22 +7,19 @@ describe Admins::Merchants::Create do
     {
       email: email,
       name: 'Merchant Name',
-      description: 'Description'
+      description: 'Description',
+      password: 'Merchant_user124'
     }
   end
-  let(:admin) { create :admin }
+  let(:admin) { create :user }
   let(:email) { 'merchant@test.com' }
 
-  it_behaves_like 'an operation'
-  it_behaves_like 'an operation allowed for admin'
-
-  it { expect { operation }.to change(User, :count).by(1) }
+  it { expect { operation }.to change(User, :count).by(2) }
   it { expect(described_class.contract_klass).to eq(User) }
 
   context 'when contract is not valid' do
     let(:email) { nil }
 
-    it { is_expected.to be_failed }
-    it { expect { operation }.not_to change(User, :count) }
+    it { expect { operation }.to raise_error(ActiveRecord::RecordInvalid) }
   end
 end
