@@ -20,7 +20,7 @@ module Admins
           id: merchant.id,
           email: merchant.email,
           name: merchant.name,
-          balance: merchant.total_transaction_sum,
+          password: 'merchant_user123',
           created_at: merchant.created_at,
           description: merchant.description
         }

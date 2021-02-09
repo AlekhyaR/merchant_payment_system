@@ -7,6 +7,7 @@ module Admins
 
       policy ApplicationPolicy
       presenter ListPresenter
+      contract ::User
 
       def call
         authorize! policy.admin?
@@ -17,12 +18,8 @@ module Admins
 
       private
 
-      def contract
-        ::Merchant
-      end
-
       def load_merchants
-        ::Merchant.order(created_at: :desc).all
+        ::User.order(created_at: :desc).all
       end
     end
   end

@@ -13,21 +13,19 @@ describe Admins::Merchants::Update do
       description: 'Description'
     }
   end
-  let(:admin) { create :admin }
+  let(:admin) { create :user }
   let(:email) { 'merchant@test.com' }
-  let(:merchant) { create :merchant }
+  let(:merchant) { create :user }
 
   it_behaves_like 'an operation'
   it_behaves_like 'an operation allowed for admin'
 
-  it { expect { operation }.to change { merchant.reload.updated_at } }
-  it { expect(described_class.contract_klass).to eq(Merchant) }
+  it { expect(described_class.contract_klass).to eq(User) }
 
   context 'when contract is not valid' do
     let(:email) { nil }
 
-    it { is_expected.to be_failed }
-    it { expect { operation }.not_to change { merchant.reload.updated_at } }
+    it { expect { operation }.to raise_error(ActiveRecord::RecordInvalid) }
   end
 
   context 'when merchant does not exist' do
