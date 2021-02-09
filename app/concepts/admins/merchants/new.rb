@@ -6,7 +6,7 @@ module Admins
       include Operation
 
       policy ApplicationPolicy
-      contract ::Merchant
+      contract ::User
 
       def call
         authorize! policy.admin?

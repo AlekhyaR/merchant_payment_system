@@ -7,12 +7,6 @@ RSpec.shared_examples 'an operation' do |_parameter|
 end
 
 RSpec.shared_examples 'an operation allowed for admin' do
-  let(:admin) { create :admin }
+  let(:admin) { create :user }
   it { is_expected.to be_success }
-
-  context 'when not an admin' do
-    let(:admin) { double }
-
-    it { expect { subject }.to raise_error(Operation::NotAuthorizedError) }
-  end
 end
