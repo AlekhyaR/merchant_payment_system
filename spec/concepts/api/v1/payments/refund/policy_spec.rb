@@ -5,33 +5,28 @@ require 'rails_helper'
 describe Api::V1::Payments::Refund::Policy do
   subject { described_class.new(merchant, request).create? }
 
-  let(:merchant) { create :merchant }
-  let(:charge) { create :charge, merchant: merchant }
+  let(:merchant) { create :user }
+  let(:capture) { create :capture, user: merchant, status: 'approved' }
   let(:request) do
     instance_double(
       'Api::V1::Payments::Refund::Contract',
-      merchant: merchant,
-      charge_transaction: charge
+      user: merchant,
+      capture_transaction: capture
     )
   end
 
   it { is_expected.to be_truthy }
 
   context 'when merchant is inactive' do
-    let(:merchant) { create :merchant, status: :inactive }
+    let(:merchant) { create :user, status: :inactive }
 
     it { is_expected.to be_falsey }
   end
 
-  context 'when charge is from other merchant' do
-    let(:charge) { create :charge }
+  context 'when capture is from other merchant' do
+    let(:capture) { create :capture, status: 'captured' }
 
     it { is_expected.to be_falsey }
   end
 
-  context 'when request is from other merchant' do
-    let(:request) { double(merchant: create(:merchant), charge_transaction: charge) }
-
-    it { is_expected.to be_falsey }
-  end
 end

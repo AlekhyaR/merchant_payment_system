@@ -12,7 +12,7 @@ module Api
           private
 
           def authorize_merchant_march?
-            @payment.authorize_transaction&.user == @payment.user
+            @payment.authorize_transaction&.user == @payment.merchant
           end
         end
       end

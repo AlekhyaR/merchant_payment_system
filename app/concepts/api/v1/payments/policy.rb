@@ -11,7 +11,6 @@ module Api
         end
 
         def create?
-          user? &&
             merchant_active? &&
             payment_merchant_match?
         end
