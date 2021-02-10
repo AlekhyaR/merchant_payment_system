@@ -54,6 +54,7 @@ module Admins
         :id,
         :email,
         :name,
+        :password,
         :description
       )
     end

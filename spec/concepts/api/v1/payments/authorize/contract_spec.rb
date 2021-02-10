@@ -8,16 +8,19 @@ describe Api::V1::Payments::Authorize::Contract do
   let(:params) do
     {
       amount: 100,
-      merchant: merchant,
+      user: merchant,
       uuid: uuid,
       customer_email: customer_email,
-      customer_phone: customer_phone
+      customer_phone: customer_phone,
+      notification_url: notification_url
     }
   end
-  let(:merchant) { create :merchant }
+
+  let(:merchant) { create :user }
   let(:uuid) { 'test' }
   let(:customer_email) { 'customer@test.com' }
   let(:customer_phone) { '0123456789' }
+  let(:notification_url) { 'http://mysite/my_notification_endpoint' }
 
   it { is_expected.to be_valid }
 
@@ -26,7 +29,7 @@ describe Api::V1::Payments::Authorize::Contract do
 
     it { is_expected.to be_kind_of(Transactions::Authorize) }
     it { expect(transaction.amount).to eq(100) }
-    it { expect(transaction.merchant).to eq(merchant) }
+    it { expect(transaction.user).to eq(merchant) }
     it { expect(transaction.uuid).to eq(uuid) }
     it { expect(transaction.customer_email).to eq(customer_email) }
     it { expect(transaction.customer_phone).to eq(customer_phone) }

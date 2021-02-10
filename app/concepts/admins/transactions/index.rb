@@ -22,7 +22,7 @@ module Admins
       end
 
       def load_transactions
-        scope = ::Transactions::Base.all.includes(:merchant)
+        scope = ::Transactions::Base.all.includes(:user)
         scope = scope.where(merchant_id: @params[:merchant_id]) if @params[:merchant_id]
         scope
       end

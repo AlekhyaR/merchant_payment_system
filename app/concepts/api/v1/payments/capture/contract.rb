@@ -20,6 +20,7 @@ module Api
               customer_email: customer_email,
               customer_phone: customer_phone,
               user: user,
+              notification_url: notification_url,
               authorize: authorize_transaction
             )
           end

@@ -22,7 +22,7 @@ module Merchants
       end
 
       def load_transactions
-        @user.transactions.includes(:merchant)
+        @user.transactions.includes(:user)
       end
     end
   end

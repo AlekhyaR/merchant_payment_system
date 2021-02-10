@@ -13,7 +13,7 @@ module Api
               amount: amount,
               customer_email: customer_email,
               customer_phone: customer_phone,
-              notification_url: notification_url
+              notification_url: notification_url,
               user: user
             )
           end

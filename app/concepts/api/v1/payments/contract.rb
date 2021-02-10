@@ -9,7 +9,8 @@ module Api
         attr_accessor :customer_email,
                       :customer_phone,
                       :user,
-                      :uuid
+                      :uuid,
+                      :notification_url
 
         validates :uuid, presence: true
         validates :customer_email, presence: true
@@ -21,7 +22,7 @@ module Api
         def validate_uuid_uniqueness
           return unless user
 
-          if Transactions::Base.exists?(merchant: user, uuid: uuid)
+          if Transactions::Base.exists?(user: user, uuid: uuid)
             errors.add(:uuid, :not_unique)
           elsif Transactions::Base.exists?(uuid: uuid)
             errors.add(:uuid, :invalid)
