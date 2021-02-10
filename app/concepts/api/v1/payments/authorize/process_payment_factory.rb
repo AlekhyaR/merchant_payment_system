@@ -11,7 +11,7 @@ module Api
                 user: merchant,
                 params: params,
                 policy: Payments::Policy,
-                service: Transactions::ProcessAuthorize,
+                service: Transactions::AuthorizeProcess,
                 contract: Authorize::Contract,
                 presenter: Authorize::Presenter
               )
