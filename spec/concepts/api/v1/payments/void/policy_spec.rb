@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-describe Api::V1::Payments::Reverse::Policy do
+describe Api::V1::Payments::Void::Policy do
   subject { described_class.new(merchant, request).create? }
 
-  let(:merchant) { create :merchant }
-  let(:request) { double(merchant: merchant, authorize_transaction: authorize) }
-  let(:authorize) { create :authorize, merchant: merchant }
+  let(:merchant) { create :user }
+  let(:request) { double(user: merchant, authorize_transaction: authorize) }
+  let(:authorize) { create :authorize, user: merchant }
 
   it { is_expected.to be_truthy }
 

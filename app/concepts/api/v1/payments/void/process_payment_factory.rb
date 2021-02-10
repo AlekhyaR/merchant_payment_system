@@ -11,7 +11,7 @@ module Api
                 user: merchant,
                 params: params,
                 policy: Void::Policy,
-                service: Transactions::ProcessReversal,
+                service: Transactions::VoidProcess,
                 contract: Void::Contract,
                 presenter: Void::Presenter
               )
