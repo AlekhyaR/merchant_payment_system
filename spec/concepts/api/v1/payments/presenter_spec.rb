@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 describe Api::V1::Payments::Presenter do
-  subject(:presenter) { described_class.new(reverse) }
+  subject(:presenter) { described_class.new(void) }
 
-  let(:reverse) { create :reversal }
+  let(:void) { create :void, status: 'voided' }
 
-  it { expect(presenter.uuid).to eq(reverse.uuid) }
-  it { expect(presenter.status).to eq(reverse.status) }
-  it { expect(presenter.processed_at).to eq(reverse.created_at) }
+  it { expect(presenter.uuid).to eq(void.uuid) }
+  it { expect(presenter.status).to eq(void.status) }
+  it { expect(presenter.processed_at).to eq(void.created_at) }
 end

@@ -7,22 +7,23 @@ describe Api::V1::Payments::Contract, type: :model do
 
   let(:params) do
     {
-      merchant: merchant,
+      user: merchant,
       uuid: uuid,
       customer_email: 'customer@test.com',
-      customer_phone: '0123456789'
+      customer_phone: '0123456789',
+      notification_url: 'http://mysite/my_notification_endpoint'
     }
   end
   let(:uuid) { 'test' }
-  let(:merchant) { create :merchant }
+  let(:merchant) { create :user }
 
   it { is_expected.to be_valid }
   it { is_expected.to validate_presence_of(:uuid) }
   it { is_expected.to validate_presence_of(:customer_email) }
-  it { is_expected.to validate_presence_of(:merchant) }
+  it { is_expected.to validate_presence_of(:user) }
 
   context 'when uuid is not unique' do
-    before { create :authorize, uuid: 'test', merchant: merchant }
+    before { create :authorize, uuid: 'test', user: merchant, status: 'pending' }
 
     it do
       expect(contract).not_to be_valid

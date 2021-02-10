@@ -14,7 +14,7 @@ describe Merchants::Transactions::Index do
 
   let(:presenter) { double }
   let(:policy) { double(merchant?: true) }
-  let(:merchant) { create :merchant }
+  let(:merchant) { create :user }
   let(:params) { {} }
 
   it_behaves_like 'an operation'

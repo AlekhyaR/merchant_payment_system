@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Api::V1::Payments::ProcessPayment do
   subject(:operation) do
     described_class.new(
-      user: double(merchant: double),
+      user: double(user: double),
       params: {},
       policy: double(new: policy),
       contract: double(new: contract),
