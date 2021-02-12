@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include SessionHelper
 
-  MERCHANT = "merchant"
+  ADMIN_MERCHANT = "admins/merchants"
+  MERCHANT_TRANSACTION = "merchants/transactions"
+
 
   before_action :set_current_user, :authenticate_user, :set_locale
 
@@ -16,7 +18,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if @current_user.nil?
       flash[:error] = 'You must be signed in to view that page.'
-      if request.original_url.include? MERCHANT
+      if request.original_url.include? MERCHANT_TRANSACTION
         redirect_to merchants_sign_in_path
       else
         redirect_to admins_sign_in_path
