@@ -10,7 +10,7 @@ module AlertHelper
 
   def with_each_alert_message(alert)
     alert.each do |k, v|
-      alert_class = flash_class(k)
+      alert_class = alert_class_by_type(k)
       case v
       when Hash
         v.each_value do |vv|

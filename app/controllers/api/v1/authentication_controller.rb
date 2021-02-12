@@ -7,15 +7,14 @@ module Api
       
       def create
         raise AuthenticationError unless merchant_user.authenticate(params.require(:password))
-        token = AuthenticationTokenService.call(merchant_user.id)
-
-        render json: { token: token }, status: :created
+        token = AuthenticationTokenService.generate_token(merchant_user_id: merchant_user.id)
+        render json: {token: token}, status: :created
       end
       
       private
 
       def merchant_user
-        @merchant_user = User.find_by(name: params.require(:name))
+        @merchant_user = User.find_by(email: params.require(:email))
       end
 
       def parameter_missing(e)

@@ -16,8 +16,8 @@ module Transactions
 
     def transaction(transaction)
       {
-        type: transaction_type(transaction),
         amount: transaction.amount,
+        type: transaction_type(transaction),
         uuid: transaction.uuid,
         status: transaction.status,
         created_at: transaction.created_at,

@@ -3,6 +3,8 @@
 module Api
   module V1
     class PaymentsController < Api::V1::ApplicationController
+      before_action :authorize_request
+
       def create
         call_operation(Payments::Create, user: current_merchant, params: create_params) do |result|
           @payment = result.presenter
