@@ -18,34 +18,28 @@ UI
 
 
 ## Implementation
-  - ** Additional changes ** 
+  - **Additional changes**
     - Moved business logic to app/concepts folder to decouple from Rails application.
   - Used following design patterns 
-    - ** Service Object ** : Used for JWT as authentication layer and process business logic of payments.
-    - ** Form Objects ** : Used for validate user's input.
-    - ** Use Cases ** : Used to handle all user related operations.
-    - ** Policies ** : Used to handle permissions.
-    - ** Presenters (View Model) ** : Used to shape data for presentation layer.
+    - **Service Object** : Used for JWT as authentication layer and process business logic of payments.
+    - **Form Objects** : Used for validate user's input.
+    - **Use Cases** : Used to handle all user related operations.
+    - **Policies** : Used to handle permissions.
+    - **Presenters (View Model)** : Used to shape data for presentation layer.
 
-[Single Table Inheritance ](https://github.com/AlekhyaR/merchant_payment_system/app/assets/images/single_table_inheritance.png)
+[Single Table Inheritance ](https://github.com/AlekhyaR/merchant_payment_system/blob/master/app/assets/images/single_table_inheritance.png)
 - Transaction status are implemented with simple enums. 
 
-## Gems Used
-  - Bootstrap, webpacker - Frontend UI
-  - Jwt - Authentication layer using JWT
-  - bcrypt - encrypt password
-  - Rspec - Unit testing 
-
 ## Tests:
-  - Specs are covered for all business logic, its now 100% test coverage
-    - Pending: Authorize user, to avoid failure of specs (mostly)
-    - Pending: Using Capybara, for feature specs
+  - Specs are covered for all business logic
+    - Pending: Specs are failing due to missing of authorizing user
+    - Pending: Use Capybara, for feature specs
     
 ## Main focus:
   - Was on Application core and its business logic
   
 ## How to USE:
-** Prerequisites **
+**Prerequisites**
   - Ruby 2.6.3
   - Rails 6.0.3
   - PostgreSQL 13.0
@@ -77,7 +71,7 @@ curl -v -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Au
 **Example**
 curl -v -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJtZXJjaGFudF91c2VyX2lkIjp7Im1lcmNoYW50X3VzZXJfaWQiOjF9fQ.nWnOK6go5GdIk55KNps-faQvuoPVUEPtiWGw-k8BSDc' -X POST -d '{"type":"authorize",uuid":"3","amount":50,"customer_email":"test@test.com","notification_url":"http://mysite/my_notification_endpoint"}' http://localhost:3000/api/v1/payments
 ```
-  ** Notes: **
+  **Notes:**
   - Make sure uuid is unique for each request.
   - For Capture / void add `-F "authorize=:authorized"`, where `:authorized` is `uuid` to existing authorize
   - For refund add `-F "capture=:captureId" ` where `:chargeId` is `uuid` to existing capture 
