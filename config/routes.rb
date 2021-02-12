@@ -15,17 +15,18 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      # mount_devise_token_auth_for 'Merchant', at: 'auth', controllers: {
-        # sessions: 'api/v1/sessions'
-      # }
+      match 'authenticate/sign_in' => 'authentication#create', via: 'post'
       resources :payments, only: [:create]
     end
   end
 
+  match 'admins/logout' => 'admins/sessions#destroy', via: 'delete'
+  match 'admins/sign_in' => 'admins/sessions#new', via: 'get'
+  match 'admins/sign_in' => 'admins/sessions#create', via: 'post'
 
-
-  match 'users/sign_in' => 'users/sessions#new', via: 'get'
-  match 'users/sign_in' => 'users/sessions#create', via: 'post'
-  root to: "home#index"
+  match 'merchants/logout' => 'merchants/sessions#destroy', via: 'delete'
+  match 'merchants/sign_in' => 'merchants/sessions#new', via: 'get'
+  match 'merchants/sign_in' => 'merchants/sessions#create', via: 'post'
   
+  root to: "home#index"
 end

@@ -6,12 +6,10 @@ class ApplicationPolicy
   end
 
   def admin?
-    @user_object.admin!
-    @user_object.admin?
+    @user.admin?
   end
 
   def merchant?
-    @user_object.merchant!
-    @user_object.merchant?
+    @user.merchant?
   end
 end

@@ -2,6 +2,8 @@
 
 module Admins
   class MerchantsController < ApplicationController
+    before_action :authenticate_user
+    
     def index
       call_operation(Admins::Merchants::Index, user: current_admin) do |op|
         @presenter = op.presenter

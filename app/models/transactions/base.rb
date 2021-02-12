@@ -19,7 +19,8 @@ module Transactions
     validates :uuid, presence: true, uniqueness: true
     validates :amount, numericality: { greater_than: 0 }, presence: true
     validates :customer_email, presence: true
-    validates :notification_url, presence: true    
+    validates :notification_url, presence: true  
+    validates :type, presence: true  
 
     def fail!
       self.uuid ||= SecureRandom.uuid
