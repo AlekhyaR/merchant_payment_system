@@ -25,10 +25,10 @@ en:
               dependent_transactions: Can't remove merhchant with transactions
         api/v1/payments/process_payment:
           unknown_attribute: Unknown paramenter '%{attribute}'
-        api/v1/payments/charge/contract:
+        api/v1/payments/capture/contract:
           attributes:
             authorize:
-              invalid_state: Can't process charge with this authorize
+              invalid_state: Can't process capture with this authorize
             amount:
               invalid: Incorrect amount
             uuid:

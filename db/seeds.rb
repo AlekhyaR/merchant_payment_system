@@ -52,3 +52,6 @@ end
     status: 1
   )
 end
+
+admin_user = User.create!(name: 'test-user', email: 'admin@test.com', password: "admin123", role: 1, status: 1)
+merchant_user = User.create!(name: 'merchant-user', email: 'merchant@test.com', password: "123", role: 1, status: 1)

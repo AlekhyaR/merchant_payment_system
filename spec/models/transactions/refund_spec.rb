@@ -8,7 +8,7 @@ RSpec.describe Transactions::Refund, type: :model do
 
     it { is_expected.to be_valid }
 
-    it 'and parent charge belong to the same merchant' do
+    it 'and parent capture belong to the same merchant' do
       expect(refund.user).to eq(refund.capture.user)
     end
   end

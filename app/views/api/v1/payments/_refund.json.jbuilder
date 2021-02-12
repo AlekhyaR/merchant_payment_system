@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.call(payment, :amount, :charge)
+json.call(payment, :amount, :capture)
