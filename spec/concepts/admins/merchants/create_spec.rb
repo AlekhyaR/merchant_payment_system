@@ -11,7 +11,7 @@ describe Admins::Merchants::Create do
       password: 'Merchant_user124'
     }
   end
-  let(:admin) { create :user }
+  let(:admin) { create(:user, :admin) }
   let(:email) { 'merchant@test.com' }
 
   it { expect { operation }.to change(User, :count).by(2) }
@@ -20,6 +20,6 @@ describe Admins::Merchants::Create do
   context 'when contract is not valid' do
     let(:email) { nil }
 
-    it { expect { operation }.to raise_error(ActiveRecord::RecordInvalid) }
+    it { is_expected.to be_failed }
   end
 end

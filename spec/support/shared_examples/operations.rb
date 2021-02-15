@@ -7,6 +7,7 @@ RSpec.shared_examples 'an operation' do |_parameter|
 end
 
 RSpec.shared_examples 'an operation allowed for admin' do
-  let(:admin) { create :user }
+  let(:admin) { create :user, :admin }
   it { is_expected.to be_success }
+  
 end

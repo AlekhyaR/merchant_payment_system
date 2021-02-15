@@ -17,7 +17,7 @@ describe Admins::Merchants::Index do
   let!(:merchant1) { create :user }
   let!(:merchant2) { create :user }
 
-  let(:admin) { create :user }
+  let(:admin) { create :user, :admin }
 
   it_behaves_like 'an operation'
   it_behaves_like 'an operation allowed for admin'

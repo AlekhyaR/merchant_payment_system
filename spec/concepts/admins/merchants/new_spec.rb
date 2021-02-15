@@ -13,7 +13,7 @@ describe Admins::Merchants::New do
       password: 'Merchant_user124'
     }
   end
-  let(:admin) { create :user }
+  let(:admin) { create :user, :admin }
   let(:email) { 'merchant@test.com' }
 
   it_behaves_like 'an operation'
